@@ -1,0 +1,32 @@
+.testimonials-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em 0;
+    text-align: center;
+}
+
+.testimonials-container {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 1em;
+    max-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+.testimonial-text {
+    font-style: italic;
+    color: #333;
+}
+
+.testimonial-author {
+    margin-top: 1em;
+    font-weight: bold;
+    color: #555;
+}

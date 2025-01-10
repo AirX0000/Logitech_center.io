@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<!-- FAQ Раздел -->
+<section class="faq">
+    <h2>Часто задаваемые вопросы</h2>
+    <div class="faq-item">
+        <h4 onclick="toggleFaq(this)">Как записаться на курс?</h4>
+        <p class="faq-answer">Вы можете записаться на курс через форму на странице курса или связавшись с нами.</p>
+    </div>
+    <div class="faq-item">
+        <h4 onclick="toggleFaq(this)">Можно ли получить сертификат?</h4>
+        <p class="faq-answer">Да, после завершения курса вы получите сертификат, подтверждающий ваши знания.</p>
+    </div>
+</section>
+
+
+{% endblock %}

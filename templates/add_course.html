@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Добавление курса</h1>
+<form method="POST" action="{{ url_for('add_course') }}">
+    <input type="text" name="name" placeholder="Название курса" required>
+    <textarea name="description" placeholder="Описание курса" required></textarea>
+    <button type="submit">Добавить</button>
+</form>
+{% endblock %}

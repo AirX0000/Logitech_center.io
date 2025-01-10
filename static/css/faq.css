@@ -1,0 +1,27 @@
+.faq-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+.faq-question {
+    font-weight: bold;
+    padding: 0.5em 0;
+    position: relative;
+}
+
+.faq-answer {
+    display: none;
+    padding: 0.5em 0;
+    color: #555;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}

@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Курс по логистике{% endblock %}
+
+{% block content %}
+<head>
+    <meta name="description" content="Курс по логистике, где вы можете узнать основы и детали логистических процессов. Подробная информация, учебные материалы и видео.">
+    <meta name="keywords" content="логистика, курс, обучение, логистические процессы">
+    <meta name="author" content="GRANT Educational Center">
+
+    <style>
+        /* Общие стили */
+        .course-container {
+            padding: 20px;
+        }
+
+        /* Стили для слайдера */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #f3f3f3; /* Фон на случай отсутствия изображений */
+            display: flex;
+            align-items: center; /* Центрирование по вертикали */
+            justify-content: center; /* Центрирование по горизонтали */
+        }
+
+        .slider-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-images img {
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            display: block;
+            object-fit: contain; /* Масштабирует изображение, сохраняя пропорции */
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .slider-button.prev {
+            left: 10px;
+        }
+
+        .slider-button.next {
+            right: 10px;
+        }
+
+        /* Пагинация */
+        .slider-pagination {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+        .slider-dot.active {
+            opacity: 1;
+            background-color: #007bff;
+        }
+
+        /* Дополнительные стили */
+        .resources {
+            margin-top: 30px;
+        }
+
+        .resources h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .resources ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resources ul li {
+            margin-bottom: 10px;
+        }
+
+        .resources ul li a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .resources ul li a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<div class="course-container">
+    <!-- Заголовок страницы -->
+    <h1>Курс по логистике</h1>
+    <p>
+        Добро пожаловать на курс по логистике! Здесь вы найдете все материалы, чтобы освоить основы и углубиться в детали логистики. 
+        Изучайте с нами и повышайте свою квалификацию!
+    </p>
+    
+    <!-- Секция слайдера -->
+    <div class="slider-container">
+        <div class="slider-images">
+            <img src="{{ url_for('static', filename='images/logistics1.jpg') }}" alt="Логистика 1">
+            <img src="{{ url_for('static', filename='images/logistics2.jpg') }}" alt="Логистика 2">
+
+            <img src="{{ url_for('static', filename='images/logistics3.jpg') }}" alt="Логистика 3">
+            <img src="{{ url_for('static', filename='images/logistics4.jpg') }}" alt="Логистика 4">
+        </div>
+        <button class="slider-button prev">&lt;</button>
+        <button class="slider-button next">&gt;</button>
+        <div class="slider-pagination"></div>
+    </div>
+
+    <!-- Дополнительные материалы -->
+    <div class="resources">
+        <h2>Материалы курса</h2>
+        <ul>
+            <li>
+                <a href="{{ url_for('static', filename='pdf/logistics_basics.pdf') }}" target="_blank">
+                    Основы логистики (PDF)
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('static', filename='pdf/logistics_advanced.pdf') }}" target="_blank">
+                    Продвинутый курс логистики (PDF)
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('static', filename='videos/logistics_intro.mp4') }}" target="_blank">
+                    Введение в логистику (Видео)
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sliderImages = document.querySelector('.slider-images');
+        const sliderDots = document.querySelector('.slider-pagination');
+        const prevButton = document.querySelector('.slider-button.prev');
+        const nextButton = document.querySelector('.slider-button.next');
+        const images = document.querySelectorAll('.slider-images img');
+        const totalSlides = images.length;
+        let currentIndex = 0;
+
+        // Создание пагинации
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('slider-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.dataset.index = i;
+            sliderDots.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function updateSlider(index) {
+            sliderImages.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? totalSlides - 1 : currentIndex - 1;
+            updateSlider(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1;
+            updateSlider(currentIndex);
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.dataset.index, 10);
+                updateSlider(currentIndex);
+            });
+        });
+
+        // Автоматическая смена слайдов
+        setInterval(() => {
+            currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1;
+            updateSlider(currentIndex);
+        }, 5000);
+    });
+</script>
+{% endblock %}

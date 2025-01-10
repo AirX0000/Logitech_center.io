@@ -1,0 +1,57 @@
+/* Default Styles (Desktop) */
+body {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.header {
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: 30%;
+    margin: 10px;
+}
+
+/* Tablets (768px и меньше) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 45%; /* Увеличиваем ширину карточек на планшетах */
+    }
+
+    .header {
+        padding: 15px;
+    }
+}
+
+/* Smartphones (576px и меньше) */
+@media (max-width: 576px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%; /* Делаем карточки на всю ширину экрана */
+        margin: 10px 0;
+    }
+
+    .header {
+        padding: 10px;
+    }
+
+    /* Уменьшаем шрифт на мобильных устройствах */
+    body {
+        font-size: 14px;
+    }
+}

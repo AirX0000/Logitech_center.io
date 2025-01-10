@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="courses-section">
+    <h2>Наши Курсы</h2>
+    <div class="courses-container">
+        <div class="course-card">
+            <h3>Логистика</h3>
+            <p>Как устроен мир в логистической сфере. Развивайте свои навыки для карьеры в логистике.</p>
+            <a href="{{ url_for('application') }}" class="enroll-button">Записаться</a>
+        </div>
+    </div>
+</div>
+
+<form method="POST" action="/checkout">
+    <h3>Выберите метод оплаты:</h3>
+    <input type="radio" id="visa" name="payment_method" value="VISA" required>
+    <label for="visa">VISA</label><br>
+    
+    <input type="radio" id="uzcard" name="payment_method" value="UZCARD" required>
+    <label for="uzcard">Uzcard</label><br>
+    
+    <button type="submit">Купить</button>
+</form>
+{% endblock %}

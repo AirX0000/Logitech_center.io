@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="blog-container">
+    <h2>Новости и факты</h2>
+    <div class="category-buttons">
+        <button class="category-button" onclick="filterCategory('finance')">Финансы</button>
+        <button class="category-button" onclick="filterCategory('audit')">Аудит</button>
+        <button class="category-button" onclick="filterCategory('programming')">Программирование</button>
+        <button class="category-button" onclick="filterCategory('logistics')">Логистика</button>
+    </div>
+    
+    
+    
+
+    <div class="news-content">
+        <div id="news-feed">
+            <p>Выберите категорию, чтобы увидеть последние новости.</p>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const newsFeed = document.getElementById('news-feed');
+
+        async function fetchNews(category) {
+            newsFeed.innerHTML = '<p>Загрузка новостей...</p>';
+            try {
+                const response = await fetch(`/fetch-news?category=${category}`);
+                const news = await response.json();
+                if (news.length > 0) {
+                    newsFeed.innerHTML = news.map(item => `
+                        <div class="news-item">
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                            <a href="${item.url}" target="_blank">Читать далее</a>
+                        </div>
+                    `).join('');
+                } else {
+                    newsFeed.innerHTML = '<p>Новости не найдены.</p>';
+                }
+            } catch (error) {
+                newsFeed.innerHTML = '<p>Ошибка при загрузке новостей.</p>';
+                console.error(error);
+            }
+        }
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.dataset.category;
+                fetchNews(category);
+            });
+        });
+    });
+
+    function filterCategory(category) {
+    const articles = document.querySelectorAll(".article");
+
+    articles.forEach(article => {
+        if (category === "all" || article.classList.contains(category)) {
+            article.style.display = "block";
+        } else {
+            article.style.display = "none";
+        }
+    });
+}
+
+</script>
+{% endblock %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const blogPosts = document.querySelectorAll(".blog-post");
+    const readMoreButtons = document.querySelectorAll(".read-more");
+
+    // Фильтрация постов
+    filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const category = button.dataset.category;
+            blogPosts.forEach(post => {
+                post.style.opacity = "0"; // Анимация исчезновения
+                setTimeout(() => {
+                    if (category === "all" || post.dataset.category === category) {
+                        post.style.display = "block";
+                    } else {
+                        post.style.display = "none";
+                    }
+                    post.style.opacity = "1"; // Анимация появления
+                }, 300);
+            });
+        });
+    });
+
+    // Разворачивание полного текста
+    readMoreButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const fullText = button.nextElementSibling;
+            if (fullText.style.display === "block") {
+                fullText.style.display = "none";
+                button.textContent = "Читать дальше";
+            } else {
+                fullText.style.display = "block";
+                button.textContent = "Скрыть";
+            }
+        });
+    });
+
+    // Обработка формы подписки
+    const subscribeForm = document.querySelector(".subscribe-form");
+    subscribeForm.addEventListener("submit", event => {
+        event.preventDefault();
+        alert("Спасибо за подписку!");
+        subscribeForm.reset();
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+        const newsItems = document.querySelectorAll(".news-item");
+        gsap.from(newsItems, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2
+        });
+    });
+</script>

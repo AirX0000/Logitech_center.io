@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Курс по IT{% endblock %}
+
+{% block content %}
+<div class="course-container">
+    <h1>Курс по IT</h1>
+    <p>Этот курс поможет вам изучить ключевые навыки и технологии в сфере IT, включая программирование, сетевые технологии и многое другое.</p>
+    
+    <!-- Секция слайдера -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <!-- Добавьте изображения для слайдов -->
+            <div class="swiper-slide"><img src="{{ url_for('static', filename='images/it1.jpg') }}" alt="Слайд 1"></div>
+            <div class="swiper-slide"><img src="{{ url_for('static', filename='images/it2.jpg') }}" alt="Слайд 2"></div>
+            <div class="swiper-slide"><img src="{{ url_for('static', filename='images/it3.jpg') }}" alt="Слайд 3"></div>
+            <div class="swiper-slide"><img src="{{ url_for('static', filename='images/it4.jpg') }}" alt="Слайд 4"></div>
+        </div>
+        <!-- Навигационные кнопки -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Пагинация -->
+        <div class="swiper-pagination"></div>
+    </div>
+    
+    <!-- Дополнительные материалы -->
+    <!-- Пример с ссылками на PDF и видео -->
+<div class="course-resources">
+    <h3>Ресурсы курса</h3>
+    <ul>
+        <li>
+            <a href="{{ url_for('static', filename='pdf/it-course.pdf') }}" target="_blank">
+                Основы логистики (PDF)
+            </a>
+        </li>
+        <!-- <li><a href="logistics-course-video.mp4" class="animated-link" target="_blank">Посмотреть видео курса</a></li> -->
+    </ul>
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+}
+
+/* Размытый фон */
+.blurred-background {
+    position: fixed; /* Фиксируем на фоне */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    filter: blur(10px); /* Задаем степень размытия */
+    z-index: -1; /* Отправляем на задний план */
+}
+
+/* Контент */
+.content {
+    position: relative;
+    z-index: 1; /* Поверх фона */
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+</style>
+
+<div class="blurred-background"></div>
+    <div class="content">
+        <section class="hero fade-in">
+            <h1>Добро пожаловать в наш учебный центр!</h1>
+            <p>Мы предлагаем качественное образование и профессиональные курсы, которые помогут вам достичь новых высот.</p>
+            <a href="{{ url_for('application') }}" class="btn">Записаться на курс</a>
+        </section>
+    </div>
+
+<section class="benefits fade-in-up">
+    <h2>Почему выбирают нас?</h2>
+    <div class="benefit-container">
+        <div class="benefit">
+            <h3>Профессиональные преподаватели</h3>
+            <p>Все наши курсы ведут опытные специалисты с многолетним опытом работы.</p>
+        </div>
+        <div class="benefit">
+            <h3>Актуальные программы</h3>
+            <p>Мы постоянно обновляем программы курсов в соответствии с современными тенденциями.</p>
+        </div>
+        <div class="benefit">
+            <h3>Удобный график</h3>
+            <p>Учитесь в удобное для вас время, как очно, так и онлайн.</p>
+        </div>
+    </div>
+</section>
+
+<section class="popular-courses">
+    <h2>Наши Курсы</h2>
+    <div class="course-container">
+        <div class="course-card">
+            <h3>Логистика</h3>
+            <p>Как устроен мир в логистической сфере.</p>
+        </div>
+    </div>
+</section>
+
+<section class="contact-info">
+    <h2>Свяжитесь с нами</h2>
+    <p>Для получения дополнительной информации позвоните нам на номер: <a href="telto:330-222-888">330-222-888</a>.</p>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedElements = document.querySelectorAll('.fade-in, .fade-in-up');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+<style>
+    .hidden {
+        display: none; /* Скрывает элемент */
+    }
+    .teacher-details {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+    }
+</style>
+</head>
+
+<div class="teachers-container">
+    <h2>Наши преподаватели</h2>
+    <div class="teacher-cards">
+        <div class="teacher-card">
+            <img src="teacher3.jpg" alt="Преподаватель 2" class="teacher-photo">
+            <h3>Malika </h3>
+            <p class="teacher-subject">Logistic teacher</p>
+            <div class="teacher-details hidden">
+                <p>Подробная информация о преподавателе Финансов: образование, достижения, опыт работы и методики преподавания.</p>
+            </div>
+            <button class="learn-more">Read more</button>
+        </div>
+
+
+        
+
+        <!-- Аналогичные карточки для других преподавателей -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Находим все кнопки "Read more"
+            const learnMoreButtons = document.querySelectorAll('.learn-more');
+    
+            learnMoreButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Находим родительский элемент (карточку преподавателя)
+                    const teacherCard = button.closest('.teacher-card');
+                    const details = teacherCard.querySelector('.teacher-details');
+    
+                    // Переключаем видимость блока с подробностями
+                    if (details.classList.contains('hidden')) {
+                        details.classList.remove('hidden');
+                        button.textContent = 'Read more';
+                    } else {
+                        details.classList.add('hidden');
+                        button.textContent = 'Read more';
+                    }
+                });
+            });
+        });
+    </script>
+    
+</div>
+{% endblock %}

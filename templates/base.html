@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="LogIkaFinans Educational Center - Образовательный центр для студентов">
+        <meta name="keywords" content="образование, курсы, университет, логистика, программирование">
+        <meta name="author" content="LogIkaFinans Educational Center">
+    
+        <!-- Title -->
+        <title>{% block title %}LogIkaFinans Educational Center{% endblock %}</title>
+    
+        <!-- Favicon -->
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+        <!-- Swiper CSS (если используется слайдер) -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    
+        <!-- JavaScript -->
+        <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    
+        <!-- Дополнительный CSS/JS для страниц -->
+        {% block head %}{% endblock %}
+    </head>
+<body>
+    <!-- Навигация -->
+    <header>
+
+<nav class="navbar">
+    
+    <a href="{{ url_for('home') }}" class="navbar-brand">Logitech - Finance & Audit Institution</a>
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Главная</a></li>
+
+        <!-- Пункт с выпадающим меню -->
+        <li class="dropdown">
+            <a href="{{ url_for('about') }}">О центре</a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ url_for('testimonials') }}">Отзывы</a></li>
+                <li><a href="{{ url_for('events') }}">События</a></li>
+                <li><a href="{{ url_for('resources') }}">Ресурсы</a></li>
+            </ul>
+        </li>
+
+        <li><a href="{{ url_for('courses') }}">Курсы</a></li>
+        <li><a href="{{ url_for('pricing') }}">Цены</a></li>
+        <li><a href="{{ url_for('teachers') }}">Преподаватели</a></li>
+        <li><a href="{{ url_for('blog') }}">Блог</a></li>
+        <li><a href="{{ url_for('contacts') }}">Контакты</a></li>
+    </ul>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+{% else %}
+    <!-- <a  class="login" href="{{ url_for('login') }}">Войти</a>
+    <a class="registration" href="{{ url_for('register') }}">Регистрация</a> -->
+
+{% endif %}
+</nav>
+
+    </header>
+    <!-- Контент страницы -->
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ year }} Учебный центр. Все права защищены.</p>
+            <ul class="social-links">
+                <li><a href="https://www.instagram.com/logitechfinance"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://t.me/logiTech_audit_finance/"><i class="fab fa-telegram"></i></a></li>
+                
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const animatedElements = document.querySelectorAll('.fade-in, .fade-in-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+        </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        AOS.init({
+            duration: 800, // Длительность анимации
+            easing: "ease-in-out", // Тип анимации
+            once: true, // Анимация срабатывает только один раз
+        });
+    });
+</script>
+
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+    </script>    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/faq.js') }}"></script> <!-- Файл скриптов для FAQ -->
+
+    <!-- Добавьте в секцию <head> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+
+<!-- Добавьте перед закрывающим тегом </body> -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        loop: true, // Зацикленный слайдер
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Находим все кнопки "Узнать больше"
+        const learnMoreButtons = document.querySelectorAll('.learn-more');
+
+        learnMoreButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Находим карточку текущего преподавателя
+                const teacherCard = button.closest('.teacher-card');
+                const details = teacherCard.querySelector('.teacher-details');
+
+                // Переключаем видимость подробной информации
+                if (details.classList.contains('hidden')) {
+                    details.classList.remove('hidden');
+                    button.textContent = 'Скрыть';
+                } else {
+                    details.classList.add('hidden');
+                    button.textContent = 'Узнать больше';
+                }
+            });
+        });
+    });
+</script>
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Находим все кнопки "Узнать больше"
+        const learnMoreButtons = document.querySelectorAll('.learn-more');
+
+        learnMoreButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Находим родительский элемент (карточку преподавателя)
+                const teacherCard = button.closest('.teacher-card');
+                const details = teacherCard.querySelector('.teacher-details');
+
+                // Переключаем видимость блока с подробностями
+                if (details.classList.contains('hidden')) {
+                    details.classList.remove('hidden');
+                    button.textContent = 'Скрыть';
+                } else {
+                    details.classList.add('hidden');
+                    button.textContent = 'Узнать больше';
+                }
+            });
+        });
+    });
+
+const text = document.querySelector("h2");
+gsap.from(text, { opacity: 0, x: -100, duration: 1 });
+
+const images = document.querySelectorAll("img");
+images.forEach(img => {
+    img.addEventListener("load", () => img.classList.add("loaded"));
+});
+
+const loadArticles = (category) => {
+    fetch(`/blog/${category}`)
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('.articles-container').innerHTML = data;
+        });
+};
+
+document.querySelectorAll('.category-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        loadArticles(category);
+    });
+});
+</script>
+    {% block extra_js %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  
+</body>
+</html>

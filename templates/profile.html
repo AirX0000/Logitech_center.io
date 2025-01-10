@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Личная страница{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <h2>Добро пожаловать, {{ user.username }}!</h2>
+    <p>Ваш email: {{ user.email }}</p>
+</div>
+{% endblock %}
+

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Обратная связь</h2>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Сообщение</th>
+        </tr>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact[0] }}</td>
+            <td>{{ contact[1] }}</td>
+            <td>{{ contact[2] }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">Нет сообщений</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
